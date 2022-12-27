@@ -1,6 +1,6 @@
 import { Outlet, ReactLocation, Route, Router } from '@tanstack/react-location';
 import { CenteredLayout } from '~/components';
-import { Optimize1, Optimize2, Refactor1, Refactor2 } from '~/pages';
+import { Optimize1, Optimize2, Ranges, Refactor1, Refactor2 } from '~/pages';
 import { Header } from './header';
 
 const Welcome = () => (
@@ -32,6 +32,10 @@ const routes: Route[] = [
   {
     path: 'optimize-2',
     element: <Optimize2 />,
+  },
+  {
+    path: 'ranges',
+    element: <Ranges />,
   },
 ];
 
