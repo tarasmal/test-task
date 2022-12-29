@@ -4,36 +4,40 @@ import { useRenderHighlight } from '~/utils';
 import css from './optimize-1.module.scss';
 
 const todosData = [
-  { id: 1, text: 'run a marathon', done: false },
-  { id: 2, text: 'ride an elephant', done: false },
-  { id: 3, text: 'swim with a fish', done: false },
+  { id: 0, text: 'run a marathon', done: false },
+  { id: 1, text: 'ride an elephant', done: false },
+  { id: 2, text: 'swim with a fish', done: false },
 ];
 
 // TODO Fix all list re-rendering when only one component is changed :(
 
 interface TodoProps {
   text: string;
-  done: boolean;
-  onClick: () => void;
+  id: number,
+  onClick: (id: number) => void;
 }
 
-const Todo = memo(({ text, done, onClick }: TodoProps) => {
+const Todo = memo(({ text, id, onClick }: TodoProps) => {
+  const [isDone, setIsDone] = useState<boolean>(false)
   const ref = useRenderHighlight(css.render);
   return (
-    <li ref={ref} onClick={onClick} className={css.listItem}>
-      {done ? '[x]' : '[ ]'} {text}
+    <li ref={ref} onClick={() => {
+      setIsDone(prevState => !prevState)
+      onClick(id)
+      console.log(todosData); //data which probably will be sent to the server is changing. We map static object, creating children with it`s own state.
+    }} className={css.listItem}>
+      {isDone ? '[x]' : '[ ]'} {text}
     </li>
   );
 });
 
 export const Optimize1 = () => {
-  const [todos, setTodos] = useState(todosData);
-
   const handleTodoClick = useCallback(
     (id: number) => {
-      setTodos(todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo)));
+      const currentTodo = todosData[id]
+      currentTodo.done = !currentTodo.done
     },
-    [todos],
+    [],
   );
 
   return (
@@ -41,12 +45,12 @@ export const Optimize1 = () => {
       <div className="text-3xl">It re-renders all items! =\</div>
       <div>We need to fix that</div>
       <ul>
-        {todos.map((item) => (
+        {todosData.map(({id, text}) => (
           <Todo
-            key={item.id}
-            text={item.text}
-            done={item.done}
-            onClick={() => handleTodoClick(item.id)}
+            key={id}
+            id={id}
+            text={text}
+            onClick={() => handleTodoClick(id)}
           />
         ))}
       </ul>
