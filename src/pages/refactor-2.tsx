@@ -1,13 +1,11 @@
 import { CenteredLayout } from '~/components';
+import { useMemo } from 'react';
 
 // TODO refactor
 
-interface QuestionOrAnswer {
-  question?: string;
-  answer?: string;
-}
+type IQuestionOrAnswer = {question: string} | {answer: string}
 
-const QnA: QuestionOrAnswer[] = [
+const QnA: IQuestionOrAnswer[] = [
   { question: 'Do you run like a fish?' },
   { answer: 'Absolutely man' },
   { question: 'Have you tried to swim like a dinosaur?' },
@@ -16,12 +14,17 @@ const QnA: QuestionOrAnswer[] = [
   { answer: 'Do I look like a counter?' },
 ];
 
-const QnaRender = ({ question, answer }: QuestionOrAnswer) => {
-  if (question) {
-    return <h3 className="font-bold text-lg">{question}</h3>;
-  } else {
-    return <p className="mb-2">{answer}</p>;
-  }
+interface AnswerQuestion {textToRender: string}
+type IEntries = ['question' | 'entries', string]
+const Question = ({textToRender}:AnswerQuestion) => <h3 className="font-bold text-lg">{textToRender}</h3>;
+const Answer = ({textToRender}: AnswerQuestion) => <p className="mb-2">{textToRender}</p>;
+const QnaRender = (props: IQuestionOrAnswer) => {
+  const [key, value] = useMemo(() => Object.entries(props)[0] as IEntries, [])
+  return key === 'question' ?
+    <Question textToRender={value} />
+    :
+    <Answer textToRender={value}/>
+
 };
 
 export const Refactor2 = () => {
