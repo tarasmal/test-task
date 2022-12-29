@@ -34,6 +34,7 @@ export const Optimize1 = () => {
       setTodos(todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo)));
     },
     [todos],
+
   );
 
   return (
