@@ -4,10 +4,28 @@ import { CenteredLayout } from '~/components';
 // TODO how can we optimize, prevent re-rendering ExpensiveComponent
 // by changing component structure ?
 
-const ExpensiveComponent = () => {
+const debounce_leading = (func: Function, timeout = 300) => {
+  let timer: any;
+  return (...args: any) => {
+    if (!timer) {
+      func.apply(this, args);
+    }
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      timer = undefined;
+    }, timeout);
+  };
+}
+
+const ExpensiveComponent = () =>  {
   const now = performance.now();
-  while (performance.now() - now < 100) {}
+  debounce_leading(() => {while (performance.now() - now < 100) {}}, 200)
   return <div>Ohh.. so expensive</div>;
+  /*
+  if this loop is a mock for very expensive calculations,
+   we can use debounce to interrupt calculations.
+    So calculations only will be executed if all page is re-rendered at moment.
+   */
 };
 
 export const Optimize2 = () => {
