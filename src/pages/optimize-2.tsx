@@ -33,7 +33,7 @@ export const Optimize2 = () => {
   const [scrollTop, setScrollTop] = useState(0);
   /*
   if we need calculations of ExpensiveComponent to be relevant all the time,
-   so the user can see updates without pausing, we can
+  then we should better use solution from branch feat/optimize-2-second-version
    */
   useEffect(() => {
     const handleScroll = () => {
