@@ -23,14 +23,18 @@ const ExpensiveComponent = () =>  {
   return <div>Ohh.. so expensive</div>;
   /*
   if this loop is a mock for very expensive calculations,
-   we can use debounce to interrupt calculations.
+   we can use debounce to interrupt calculations if component re-renders,
+   so in this way we will interrupt unnecessary calculations.
     So calculations only will be executed if all page is re-rendered at moment.
    */
 };
 
 export const Optimize2 = () => {
   const [scrollTop, setScrollTop] = useState(0);
-
+  /*
+  if we need calculations of ExpensiveComponent to be relevant all the time,
+   so the user can see updates without pausing, we can
+   */
   useEffect(() => {
     const handleScroll = () => {
       setScrollTop(window.scrollY);
