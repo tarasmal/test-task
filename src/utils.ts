@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef } from 'react';
+import { Item } from '~/pages/ranges/utils';
 
 export const useRenderHighlight = (className: string) => {
   // TODO fix any
@@ -18,7 +19,7 @@ export const useRenderHighlight = (className: string) => {
 };
 
 // TODO fix any
-export const range = (n: number, fn: (n: number) => any) => {
+export const range = (n: number, fn: (n: number) => Item) => {
   const result = [];
   for (let i = 0; i < n; i++) {
     result.push(fn(i + 1));

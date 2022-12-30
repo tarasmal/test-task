@@ -8,11 +8,11 @@ enum colorVariants {
   green='green',
   blue='blue'
 }
-type colors = keyof colorVariants
-// TODO could we make this range function infer the type, so we don't get any here?
+export type colors = keyof colorVariants
+// TODO could we make this range function infer the type, so we don't get any here? // done
 export const items: Item[] = range(40, (index) => ({
   date: formatDate(addDays(baseDate, index)),
-  color: chooseRandomly(Object.values(colorVariants)),
+  color: chooseRandomly(Object.keys(colorVariants)),
 }));
 
 export const dataSample = {
@@ -37,9 +37,10 @@ export interface Range {
 
 
 // TODO could we type this stronger, so autocomplete by key works? //done
-export const colorToClassName: Record<colorVariants, string> = {
-  red: 'bg-red-300 text-red-900',
-  green: 'bg-green-300 text-green-900',
-  blue: 'bg-blue-300 text-blue-900'
+
+export const colorToClassName: Record<keyof any | colorVariants, string>= {
+  [colorVariants.red]: 'bg-red-300 text-red-900',
+  [colorVariants.green]: 'bg-green-300 text-green-900',
+  [colorVariants.blue]: 'bg-blue-300 text-blue-900'
 };
 
