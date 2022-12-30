@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { LastTaskNavbarProps } from '~/components/organisms/LastTaskNavbar/LastTaskNavbar.types';
-import Button from '~/components/atoms/Button/Button';
 import './style.scss';
+import UploadInput from '~/components/atoms/UploadInput/UploadInput';
 
-const LastTaskNavbar = ({}: LastTaskNavbarProps) => {
-  const [fileName, setFileName] = useState('Here goes the file name')
+const LastTaskNavbar = ({fileName, setFileName}: LastTaskNavbarProps) => {
+  function handleChange(this: HTMLInputElement, e: any) {
+    setFileName(URL.createObjectURL(e.target.files[0]));
+  }
   return (
     <div className={'navbar'}>
-      <h2>{fileName}</h2>
-      <Button onClickHandler={() => {}} className={'primary-button'}>Upload image</Button>
+      <p className={'header'}>{fileName}</p>
+      <UploadInput onChange={handleChange} />
     </div>
   );
 };

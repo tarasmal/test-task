@@ -2,5 +2,12 @@
   padding: 20px 5px;
   display: flex;
   flex-direction: column;
+  row-gap: 10px;
   height: 100%;
+}
+.image-container {
+  display: flex;
+  height: fit-content;
+  width: 100%;
+  justify-content: center;
 }
