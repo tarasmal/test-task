@@ -10,7 +10,7 @@ enum colorVariants {
 }
 export type colors = keyof colorVariants
 // TODO could we make this range function infer the type, so we don't get any here? // done
-export const items: Item[] = range(40, (index) => ({
+export const randomItems: Item[] = range(40, (index) => ({
   date: formatDate(addDays(baseDate, index)),
   color: chooseRandomly(Object.keys(colorVariants)),
 }));

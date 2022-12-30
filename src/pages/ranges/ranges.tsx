@@ -1,15 +1,20 @@
 import clsx from 'clsx';
 import untypedItems from './items.json';
 import untypedRanges from './ranges.json';
-import { colorToClassName, dataSample, Item, Range } from './utils';
+import { colorToClassName, dataSample, Item, randomItems, Range } from './utils';
 
 const items = untypedItems as Item[];
 const ranges = untypedRanges as Range[];
 
-const transform = (items: Item[]) => {
-  // TODO implement
 
-  return ranges;
+const transform = (items: Item[]) => {
+  const transformed: Range[] = [{start: items[0].date, end: items[0].date, color: items[0].color}]
+  items.slice(0, items.length - 1).forEach(({date, color}, index) => color === items[index + 1].color ?
+    transformed[transformed.length - 1].end = items[index + 1].date
+    :
+    transformed.push({start: items[index + 1].date, end: items[index + 1].date, color: items[index + 1].color})
+  )
+  return transformed;
 };
 
 const RangesView = ({ ranges }: { ranges: Range[] }) => (
@@ -40,7 +45,7 @@ export const Ranges = () => {
 
       <h3 className="text-xl font-bold row-start-2">Discretes</h3>
       <ul className="space-y-4">
-        {items.map((item) => (
+        {randomItems.map((item) => (
           <li
             key={item.date}
             className={clsx('h-10 flex items-center px-5 rounded', colorToClassName[item.color])}
@@ -54,7 +59,7 @@ export const Ranges = () => {
       <RangesView ranges={ranges} />
 
       <h3 className="text-xl font-bold row-start-2">Ranges implementation</h3>
-      <RangesView ranges={transform(items)} />
+      <RangesView ranges={transform(randomItems)} />
     </div>
   );
 };
