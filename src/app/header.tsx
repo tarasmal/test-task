@@ -30,6 +30,7 @@ export const Header = () => (
         <NavItem to="/optimize-1">Optimize 1</NavItem>
         <NavItem to="/optimize-2">Optimize 2</NavItem>
         <NavItem to="/ranges">Ranges</NavItem>
+        <NavItem to={'/last-task'}>Last task</NavItem>
       </ul>
     </nav>
   </header>
