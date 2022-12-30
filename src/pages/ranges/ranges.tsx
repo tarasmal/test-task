@@ -9,10 +9,20 @@ const ranges = untypedRanges as Range[];
 
 const transform = (items: Item[]) => {
   const transformed: Range[] = [{start: items[0].date, end: items[0].date, color: items[0].color}]
-  items.slice(0, items.length - 1).forEach(({date, color}, index) => color === items[index + 1].color ?
-    transformed[transformed.length - 1].end = items[index + 1].date
-    :
-    transformed.push({start: items[index + 1].date, end: items[index + 1].date, color: items[index + 1].color})
+  items.slice(0, items.length - 1).forEach(({date, color}, index) => {
+    const nextItem = items[index + 1]
+    color === nextItem.color ?
+      transformed[transformed.length - 1].end = nextItem.date
+      :
+      transformed.push(
+        {
+          start: nextItem.date,
+          end: nextItem.date,
+          color: nextItem.color
+        }
+      )
+  }
+
   )
   return transformed;
 };
