@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { ButtonTypes } from '~/components/Button/Button.types';
+import { ButtonTypes } from '~/components/atoms/Button/Button.types';
 import './button.scss'
 
 const Button = (

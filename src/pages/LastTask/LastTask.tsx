@@ -1,10 +1,11 @@
 import React from 'react';
-import Button from '~/components/Button/Button';
+import LastTaskNavbar from '~/components/organisms/LastTaskNavbar/LastTaskNavbar';
+import './lastTask.scss'
 
 const LastTask = () => {
   return (
-    <div>
-      <Button className={'primary-button'} onClickHandler={() => {}}>s</Button>
+    <div className={'last-task-container'}>
+      <LastTaskNavbar />
     </div>
   );
 };

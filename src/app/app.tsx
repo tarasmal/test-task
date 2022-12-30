@@ -4,6 +4,7 @@ import { Optimize1, Optimize2, Ranges, Refactor1, Refactor2 } from '~/pages';
 import { Header } from './header';
 import LastTask from '~/pages/LastTask/LastTask';
 
+
 const Welcome = () => (
   <CenteredLayout className="gap-4">
     <div className="text-3xl">Welcome to 24Slides test task!</div>
